@@ -6,7 +6,26 @@ nutz-sqltpl SQL模板实现
 默认采用beetl引擎（注意,这不是与BeetlSql的集成），其他模版引擎可以自己扩展，详情看源码
 
 #用法
-首先, 在MainSetup.init内加入下面的语句, 启用热加载
+首先在ioc.js中
+```javascript
+var ioc = {
+    sqlTplIocEventListener: {
+        type: "github.threefish.nutz.sqltpl.SqlTplIocEventListener"
+    },
+    beetlSqlTemplteEngineImpl: {
+        type: "github.threefish.nutz.sqltpl.BeetlSqlTemplteEngineImpl",
+        events: {
+            create: "init"
+        },
+        fields: {
+             statementStart : "[#",//可修改
+             statementEnd :"#]"//可修改
+         }
+    }
+}
+```
+
+然后，在MainSetup.init内加入下面的语句, 启用热加载
 
 ```java
 SqlsTplHolder.DEVELOPER_MODE = true;

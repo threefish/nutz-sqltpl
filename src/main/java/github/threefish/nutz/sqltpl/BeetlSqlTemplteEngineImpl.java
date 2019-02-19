@@ -17,13 +17,23 @@ import java.util.Map;
 @IocBean(create = "init")
 public class BeetlSqlTemplteEngineImpl implements ISqlTemplteEngine {
 
-    static GroupTemplate gt;
+    GroupTemplate gt;
+    String statementStart = "[#";
+    String statementEnd = "#]";
+
+    public void setStatementStart(String statementStart) {
+        this.statementStart = statementStart;
+    }
+
+    public void setStatementEnd(String statementEnd) {
+        this.statementEnd = statementEnd;
+    }
 
     public void init() {
         try {
             Configuration cfg = Configuration.defaultConfiguration();
-            cfg.setStatementStart("[#");
-            cfg.setStatementEnd("#]");
+            cfg.setStatementStart(statementStart);
+            cfg.setStatementEnd(statementEnd);
             cfg.setHtmlTagSupport(false);
             gt = new GroupTemplate(new StringTemplateResourceLoader(), cfg);
         } catch (IOException e) {
