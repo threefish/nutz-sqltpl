@@ -1,4 +1,4 @@
-nutz-plugins-sqltpl SQL模板实现
+nutz-sqltpl SQL模板实现
 ==================================
 
 ### 支持多种模板引擎
