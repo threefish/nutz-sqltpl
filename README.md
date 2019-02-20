@@ -6,7 +6,15 @@ nutz-sqltpl SQL模板实现
 默认采用beetl引擎（注意,这不是与BeetlSql的集成），其他模版引擎可以自己扩展，详情看源码
 
 #用法
-首先在ioc.js中
+然后在pom.xml中
+```xml
+<dependency>
+  <groupId>com.github.threefish.nutz</groupId>
+  <artifactId>nutz-sqltpl</artifactId>
+  <version>1.0</version>
+</dependency>
+```
+然后在ioc.js中
 ```javascript
 var ioc = {
     sqlTplIocEventListener: {
