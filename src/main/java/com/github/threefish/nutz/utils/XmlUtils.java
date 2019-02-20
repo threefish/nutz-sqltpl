@@ -16,7 +16,7 @@ import java.util.HashMap;
 
 /**
  * @author 黄川 huchuc@vip.qq.com
- * @date 2019/2/19
+ * <p>Date: 2019/2/19</p>
  */
 public class XmlUtils {
 
@@ -25,7 +25,7 @@ public class XmlUtils {
     /**
      * 加载XML Document
      *
-     * @param resource
+     * @param resource 文件资源
      * @return 文档
      */
     public static Document loadDocument(FileResource resource) {
