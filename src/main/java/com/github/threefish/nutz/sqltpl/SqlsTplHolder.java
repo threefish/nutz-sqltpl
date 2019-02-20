@@ -1,6 +1,6 @@
-package github.threefish.nutz.sqltpl;
+package com.github.threefish.nutz.sqltpl;
 
-import github.threefish.nutz.utils.XmlUtils;
+import com.github.threefish.nutz.utils.XmlUtils;
 import org.nutz.dao.Sqls;
 import org.nutz.dao.sql.Sql;
 import org.nutz.log.Log;

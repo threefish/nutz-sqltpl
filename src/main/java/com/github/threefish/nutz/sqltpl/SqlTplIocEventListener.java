@@ -1,4 +1,4 @@
-package github.threefish.nutz.sqltpl;
+package com.github.threefish.nutz.sqltpl;
 
 import org.nutz.ioc.IocEventListener;
 import org.nutz.ioc.loader.annotation.IocBean;

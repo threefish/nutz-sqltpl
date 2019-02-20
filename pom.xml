@@ -4,9 +4,22 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>github.threefish.nutz</groupId>
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
+    <groupId>com.github.threefish.nutz</groupId>
     <artifactId>nutz-sqltpl</artifactId>
     <version>1.0</version>
+
+    <url>https://github.com/threefish</url>
+    <issueManagement>
+        <system>Github Issue</system>
+        <url>https://github.com/threefish/nutz-sqltpl/issues</url>
+    </issueManagement>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -70,4 +83,23 @@
         </dependency>
     </dependencies>
 
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <tag>master</tag>
+        <url>git@github.com:threefish/nutz-sqltpl.git</url>
+        <connection>scm:git:git@github.com:threefish/nutz-sqltpl.git</connection>
+        <developerConnection>scm:git:git@github.com:threefish/nutz-sqltpl.git</developerConnection>
+    </scm>
+    <developers>
+        <developer>
+            <name>threefish</name>
+            <email>huchuc@vip.qq.com</email>
+        </developer>
+    </developers>
 </project>

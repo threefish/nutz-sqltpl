@@ -1,4 +1,4 @@
-package github.threefish.nutz.sqltpl;
+package com.github.threefish.nutz.sqltpl;
 
 import org.beetl.core.Configuration;
 import org.beetl.core.GroupTemplate;

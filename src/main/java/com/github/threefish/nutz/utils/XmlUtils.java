@@ -1,4 +1,4 @@
-package github.threefish.nutz.utils;
+package com.github.threefish.nutz.utils;
 
 import org.nutz.lang.Streams;
 import org.nutz.lang.Strings;

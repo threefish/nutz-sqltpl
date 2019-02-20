@@ -10,14 +10,9 @@ nutz-sqltpl SQL模板实现
 ```javascript
 var ioc = {
     sqlTplIocEventListener: {
-        type: "github.threefish.nutz.sqltpl.SqlTplIocEventListener"
-    },
-    beetlSqlTemplteEngineImpl: {
-        type: "github.threefish.nutz.sqltpl.BeetlSqlTemplteEngineImpl",
-        events: {
-            create: "init"
-        },
-        fields: {
+        type: SSqlTplIocEventListenerineImpl: {
+        type: BeetlSqlTemplteEngineImpl,
+     BeetlSqlTemplteEngineImpl     fields: {
              statementStart : "[#",//可修改
              statementEnd :"#]"//可修改
          }
