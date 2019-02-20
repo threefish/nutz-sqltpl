@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * @author 黄川 huchuc@vip.qq.com
- * @date: 2019/2/19
+ * @date 2019/2/19
  */
 public interface ISqlDaoExecuteService<T> {
     /**
@@ -45,10 +45,10 @@ public interface ISqlDaoExecuteService<T> {
     /**
      * 分页查询列表
      *
-     * @param id
-     * @param param
-     * @param pager
-     * @return
+     * @param id    sqlxml中的唯一ID
+     * @param param 查询参数
+     * @param pager 分页参数
+     * @return 列表NutMap类型
      */
     default List<NutMap> queryMapBySql(String id, NutMap param, Pager pager) {
         Sql sql = getSqlsTplHolder().getSql(id, param);
@@ -61,10 +61,10 @@ public interface ISqlDaoExecuteService<T> {
     /**
      * 分页查询列表实体
      *
-     * @param id
-     * @param param
-     * @param pager
-     * @return
+     * @param id    sqlxml中的唯一ID
+     * @param param 查询参数
+     * @param pager 分页参数
+     * @return 列表实体类型
      */
     default List<T> queryEntityBySql(String id, NutMap param, Pager pager) {
         Sql sql = getSqlsTplHolder().getSql(id, param);
@@ -78,9 +78,9 @@ public interface ISqlDaoExecuteService<T> {
     /**
      * 不分页查询列表
      *
-     * @param id
-     * @param param
-     * @return
+     * @param id    sqlxml中的唯一ID
+     * @param param 查询参数
+     * @return 列表NutMap类型
      */
     default List<NutMap> queryMapBySql(String id, NutMap param) {
         Sql sql = getSqlsTplHolder().getSql(id, param);
@@ -92,9 +92,9 @@ public interface ISqlDaoExecuteService<T> {
     /**
      * 不分页查询列表实体
      *
-     * @param id
-     * @param param
-     * @return
+     * @param id    sqlxml中的唯一ID
+     * @param param 查询参数
+     * @return 列表实体类型
      */
     default List<T> queryEntityBySql(String id, NutMap param) {
         Sql sql = getSqlsTplHolder().getSql(id, param);
@@ -107,9 +107,9 @@ public interface ISqlDaoExecuteService<T> {
     /**
      * 获取单个
      *
-     * @param id
-     * @param param
-     * @return
+     * @param id    sqlxml中的唯一ID
+     * @param param 查询参数
+     * @return 单个 NutMap
      */
     default NutMap fetchMapBySql(String id, NutMap param) {
         Sql sql = getSqlsTplHolder().getSql(id, param);
@@ -121,9 +121,9 @@ public interface ISqlDaoExecuteService<T> {
     /**
      * 获取单个
      *
-     * @param id
-     * @param param
-     * @return
+     * @param id    sqlxml中的唯一ID
+     * @param param 查询参数
+     * @return 单个实体类
      */
     default T fetchEntityBySql(String id, NutMap param) {
         Sql sql = getSqlsTplHolder().getSql(id, param);

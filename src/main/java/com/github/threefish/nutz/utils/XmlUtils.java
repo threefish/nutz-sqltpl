@@ -16,7 +16,7 @@ import java.util.HashMap;
 
 /**
  * @author 黄川 huchuc@vip.qq.com
- * @date: 2019/2/19
+ * @date 2019/2/19
  */
 public class XmlUtils {
 
@@ -26,7 +26,7 @@ public class XmlUtils {
      * 加载XML Document
      *
      * @param resource
-     * @return
+     * @return 文档
      */
     public static Document loadDocument(FileResource resource) {
         try {
@@ -52,10 +52,10 @@ public class XmlUtils {
     /**
      * 设置缓存
      *
-     * @param document
-     * @param tag
-     * @param attrName
-     * @param hashMap
+     * @param document 文档
+     * @param tag      标签
+     * @param attrName 属性
+     * @param hashMap  map对象
      */
     public static void setCache(Document document, String tag, String attrName, HashMap hashMap) {
         NodeList nodeList = document.getElementsByTagName(tag);

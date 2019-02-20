@@ -4,7 +4,7 @@ import java.util.Map;
 
 /**
  * @author 黄川 huchuc@vip.qq.com
- * @date: 2019/2/19
+ * @date 2019/2/19
  */
 public interface ISqlTemplteEngine {
     /**
@@ -12,7 +12,7 @@ public interface ISqlTemplteEngine {
      *
      * @param source   源
      * @param bindData 绑定参数
-     * @return
+     * @return 渲染后的SQL
      */
     String render(String source, Map bindData);
 }

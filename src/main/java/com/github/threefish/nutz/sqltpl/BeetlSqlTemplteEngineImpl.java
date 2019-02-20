@@ -12,7 +12,7 @@ import java.util.Map;
 
 /**
  * @author 黄川 huchuc@vip.qq.com
- * @date: 2019/2/19
+ * @date 2019/2/19
  */
 @IocBean(create = "init")
 public class BeetlSqlTemplteEngineImpl implements ISqlTemplteEngine {
@@ -46,7 +46,7 @@ public class BeetlSqlTemplteEngineImpl implements ISqlTemplteEngine {
      *
      * @param templeText 模版内容
      * @param bindData   绑定参数
-     * @return
+     * @return 渲染后的SQL
      */
     @Override
     public String render(String templeText, Map bindData) throws BeetlException {

@@ -14,7 +14,7 @@ import java.util.Map;
 
 /**
  * @author 黄川 huchuc@vip.qq.com
- * @date: 2019/2/18
+ * @date 2019/2/18
  */
 public class SqlsTplHolder {
 
@@ -57,7 +57,7 @@ public class SqlsTplHolder {
      *
      * @param id    xml中的唯一ID
      * @param param 变量参数
-     * @return
+     * @return 渲染后的SQL文本
      */
     public String renderSql(String id, Map<String, Object> param) {
         String sqlTemplate = getSqlTemplate(id);
@@ -70,7 +70,7 @@ public class SqlsTplHolder {
      *
      * @param id    xml中的唯一ID
      * @param param 变量参数
-     * @return
+     * @return 渲染后可供执行的Sql对象
      */
     public Sql getSql(String id, Map<String, Object> param) {
         String sqlTemplate = getSqlTemplate(id);
