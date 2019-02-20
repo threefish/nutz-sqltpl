@@ -17,13 +17,20 @@ nutz-sqltpl SQL模板实现
 然后在ioc.js中
 ```javascript
 var ioc = {
-    sqlTplIocEventListener: {
-        type: SSqlTplIocEventListenerineImpl: {
-        type: BeetlSqlTemplteEngineImpl,
-     BeetlSqlTemplteEngineImpl     fields: {
-             statementStart : "[#",//可修改
-             statementEnd :"#]"//可修改
-         }
+   sqlTplIocEventListener: {
+           type: "com.github.threefish.nutz.sqltpl.SqlTplIocEventListener",
+           args: [{refer: '$ioc'}]
+       },
+       beetlSqlTemplteEngineImpl: {
+           type: "com.github.threefish.nutz.sqltpl.BeetlSqlTemplteEngineImpl",
+           events: {
+               create: "init"
+           },
+           fields: {
+                statementStart : "[#",//可修改
+                statementEnd :"#]"//可修改
+            }
+       }
     }
 }
 ```

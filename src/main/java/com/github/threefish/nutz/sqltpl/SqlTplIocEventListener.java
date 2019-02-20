@@ -1,11 +1,11 @@
 package com.github.threefish.nutz.sqltpl;
 
+import org.nutz.ioc.Ioc;
 import org.nutz.ioc.IocEventListener;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.lang.Encoding;
 import org.nutz.log.Log;
 import org.nutz.log.Logs;
-import org.nutz.mvc.Mvcs;
 import org.nutz.resource.impl.FileResource;
 
 import java.io.File;
@@ -18,9 +18,15 @@ import java.net.URLDecoder;
  * @author 黄川 huchuc@vip.qq.com
  * <p>Date: 2019/2/19</p>
  */
-@IocBean
+@IocBean(args = "refer:$ioc")
 public class SqlTplIocEventListener implements IocEventListener {
     private static final Log LOG = Logs.get();
+
+    private Ioc ioc;
+
+    public SqlTplIocEventListener(Ioc ioc) {
+        this.ioc = ioc;
+    }
 
     @Override
     public Object afterBorn(Object obj, String beanName) {
@@ -33,7 +39,7 @@ public class SqlTplIocEventListener implements IocEventListener {
         SqlsXml sqls = (SqlsXml) klass.getAnnotation(SqlsXml.class);
         if (sqls != null) {
             FileResource resource = getXmlFileResource(klass, sqls.value());
-            SqlsTplHolder holder = new SqlsTplHolder(resource, Mvcs.ctx().getDefaultIoc().getByType(sqls.klass()));
+            SqlsTplHolder holder = new SqlsTplHolder(resource, ioc.getByType(sqls.klass()));
             Field[] fields = klass.getDeclaredFields();
             for (Field field : fields) {
                 if (field.getType() == SqlsTplHolder.class) {
