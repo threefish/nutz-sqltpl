@@ -9,7 +9,7 @@ nutz-sqltpl SQL模板实现
 然后在pom.xml中
 ```xml
 <dependency>
-  <groupId>com.github.threefish.nutz</groupId>
+  <groupId>com.github.threefish</groupId>
   <artifactId>nutz-sqltpl</artifactId>
   <version>1.0</version>
 </dependency>

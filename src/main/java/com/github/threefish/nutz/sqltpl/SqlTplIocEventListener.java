@@ -2,12 +2,17 @@ package com.github.threefish.nutz.sqltpl;
 
 import org.nutz.ioc.IocEventListener;
 import org.nutz.ioc.loader.annotation.IocBean;
+import org.nutz.lang.Encoding;
+import org.nutz.log.Log;
+import org.nutz.log.Logs;
 import org.nutz.mvc.Mvcs;
 import org.nutz.resource.impl.FileResource;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.net.URL;
+import java.net.URLDecoder;
 
 /**
  * @author 黄川 huchuc@vip.qq.com
@@ -15,6 +20,7 @@ import java.net.URL;
  */
 @IocBean
 public class SqlTplIocEventListener implements IocEventListener {
+    private static final Log LOG = Logs.get();
 
     @Override
     public Object afterBorn(Object obj, String beanName) {
@@ -57,9 +63,16 @@ public class SqlTplIocEventListener implements IocEventListener {
      */
     private FileResource getXmlFileResource(Class klass, String fileName) {
         String pn = klass.getPackage().getName().replace(".", "/");
-        URL url = klass.getClassLoader().getResource("/" + pn + "/" + fileName);
-        if (url != null && new File(url.getFile()).exists()) {
-            return new FileResource(new File(url.getFile()));
+        URL url = klass.getClassLoader().getResource(pn + "/" + fileName);
+        try {
+            if (url != null) {
+                File file = new File(URLDecoder.decode(url.getFile(), Encoding.defaultEncoding()));
+                if (file.exists()) {
+                    return new FileResource(file);
+                }
+            }
+        } catch (UnsupportedEncodingException e) {
+            LOG.error(e);
         }
         throw new RuntimeException(String.format("sqls xml [%s] is not exists!!!", fileName));
     }

@@ -1,10 +1,12 @@
 package com.github.threefish.nutz.sqltpl;
 
+import com.github.threefish.nutz.dto.PageDataDTO;
 import org.nutz.dao.Dao;
 import org.nutz.dao.Sqls;
 import org.nutz.dao.entity.Entity;
 import org.nutz.dao.pager.Pager;
 import org.nutz.dao.sql.Sql;
+import org.nutz.dao.util.Daos;
 import org.nutz.lang.util.NutMap;
 
 import java.util.List;
@@ -50,12 +52,12 @@ public interface ISqlDaoExecuteService<T> {
      * @param pager 分页参数
      * @return 列表NutMap类型
      */
-    default List<NutMap> queryMapBySql(String id, NutMap param, Pager pager) {
+    default PageDataDTO queryMapBySql(String id, NutMap param, Pager pager) {
         Sql sql = getSqlsTplHolder().getSql(id, param);
         sql.setCallback(Sqls.callback.maps());
         sql.setPager(pager);
         getDao().execute(sql);
-        return sql.getList(NutMap.class);
+        return new PageDataDTO(Daos.queryCount(getDao(), sql), sql.getList(NutMap.class));
     }
 
     /**
@@ -66,13 +68,13 @@ public interface ISqlDaoExecuteService<T> {
      * @param pager 分页参数
      * @return 列表实体类型
      */
-    default List<T> queryEntityBySql(String id, NutMap param, Pager pager) {
+    default PageDataDTO queryEntityBySql(String id, NutMap param, Pager pager) {
         Sql sql = getSqlsTplHolder().getSql(id, param);
         sql.setCallback(Sqls.callback.entities());
         sql.setEntity(getEntity());
         sql.setPager(pager);
         getDao().execute(sql);
-        return sql.getList(getEntityClass());
+        return new PageDataDTO(Daos.queryCount(getDao(), sql), sql.getList(getEntityClass()));
     }
 
     /**
@@ -131,6 +133,32 @@ public interface ISqlDaoExecuteService<T> {
         sql.setEntity(getEntity());
         getDao().execute(sql);
         return (T) sql.getObject(getEntityClass());
+    }
+
+    /**
+     * 更新
+     *
+     * @param id    sqlxml中的唯一ID
+     * @param param 参数
+     * @return 更新个数
+     */
+    default int updateBySql(String id, NutMap param) {
+        Sql sql = getSqlsTplHolder().getSql(id, param);
+        sql.setCallback(Sqls.callback.integer());
+        sql.setEntity(getEntity());
+        getDao().execute(sql);
+        return sql.getInt();
+    }
+
+    /**
+     * 删除
+     *
+     * @param id    sqlxml中的唯一ID
+     * @param param 参数
+     * @return 删除个数
+     */
+    default int delectBySql(String id, NutMap param) {
+        return updateBySql(id, param);
     }
 
 }
