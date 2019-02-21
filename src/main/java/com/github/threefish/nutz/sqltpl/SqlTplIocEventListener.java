@@ -21,7 +21,7 @@ import java.net.URLDecoder;
 @IocBean(args = "refer:$ioc")
 public class SqlTplIocEventListener implements IocEventListener {
     private static final Log LOG = Logs.get();
-
+    private static final String JAR = "jar";
     private Ioc ioc;
 
     public SqlTplIocEventListener(Ioc ioc) {
@@ -38,8 +38,7 @@ public class SqlTplIocEventListener implements IocEventListener {
         Class klass = obj.getClass();
         SqlsXml sqls = (SqlsXml) klass.getAnnotation(SqlsXml.class);
         if (sqls != null) {
-            FileResource resource = getXmlFileResource(klass, sqls.value());
-            SqlsTplHolder holder = new SqlsTplHolder(resource, ioc.getByType(sqls.klass()));
+            SqlsTplHolder holder = getSqlsTplHolder(klass, sqls.value(), ioc.getByType(sqls.klass()));
             Field[] fields = klass.getDeclaredFields();
             for (Field field : fields) {
                 if (field.getType() == SqlsTplHolder.class) {
@@ -67,14 +66,18 @@ public class SqlTplIocEventListener implements IocEventListener {
      * @param fileName
      * @return
      */
-    private FileResource getXmlFileResource(Class klass, String fileName) {
-        String pn = klass.getPackage().getName().replace(".", "/");
-        URL url = klass.getClassLoader().getResource(pn + "/" + fileName);
+    private SqlsTplHolder getSqlsTplHolder(Class klass, String fileName, ISqlTemplteEngine sqlTemplteEngine) {
+        String xmlPath = klass.getPackage().getName().replace(".", File.separator) + File.separator + fileName;
+        URL url = klass.getClassLoader().getResource(xmlPath);
         try {
             if (url != null) {
-                File file = new File(URLDecoder.decode(url.getFile(), Encoding.defaultEncoding()));
-                if (file.exists()) {
-                    return new FileResource(file);
+                if (JAR.equals(url.getProtocol())) {
+                    return new SqlsTplHolder(klass.getClassLoader().getResourceAsStream(xmlPath), sqlTemplteEngine);
+                } else {
+                    File file = new File(URLDecoder.decode(url.getFile(), Encoding.defaultEncoding()));
+                    if (file.exists()) {
+                        return new SqlsTplHolder(new FileResource(file), sqlTemplteEngine);
+                    }
                 }
             }
         } catch (UnsupportedEncodingException e) {

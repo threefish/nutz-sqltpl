@@ -127,7 +127,7 @@ public interface ISqlDaoExecuteService<T> {
      * @param param 查询参数
      * @return 单个实体类
      */
-    default T fetchEntityBySql(String id, NutMap param) {
+    default <T> T fetchEntityBySql(String id, NutMap param) {
         Sql sql = getSqlsTplHolder().getSql(id, param);
         sql.setCallback(Sqls.callback.entity());
         sql.setEntity(getEntity());
@@ -145,7 +145,6 @@ public interface ISqlDaoExecuteService<T> {
     default int updateBySql(String id, NutMap param) {
         Sql sql = getSqlsTplHolder().getSql(id, param);
         sql.setCallback(Sqls.callback.integer());
-        sql.setEntity(getEntity());
         getDao().execute(sql);
         return sql.getInt();
     }

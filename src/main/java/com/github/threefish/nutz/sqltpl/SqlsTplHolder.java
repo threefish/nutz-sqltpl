@@ -9,6 +9,7 @@ import org.nutz.resource.impl.FileResource;
 import org.w3c.dom.Document;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,7 +37,7 @@ public class SqlsTplHolder {
      */
     private HashMap<String, String> sqlTemplateCache = new HashMap<>();
     /**
-     * 文件资源
+     * 文件资源，jar情况下为null，且当前资源失去热加载功能
      */
     private FileResource resource;
     /**
@@ -44,11 +45,27 @@ public class SqlsTplHolder {
      */
     private ISqlTemplteEngine sqlTemplteEngine;
 
-
+    /**
+     * 普通文件情况下
+     *
+     * @param resource         xml文件资源
+     * @param sqlTemplteEngine SQL模版引擎
+     */
     public SqlsTplHolder(FileResource resource, ISqlTemplteEngine sqlTemplteEngine) {
         this.resource = resource;
         this.sqlTemplteEngine = sqlTemplteEngine;
-        this.load();
+        this.load(null);
+    }
+
+    /**
+     * jar 情况下
+     *
+     * @param inputStream      JAR中的xml文件流
+     * @param sqlTemplteEngine SQL模版引擎
+     */
+    public SqlsTplHolder(InputStream inputStream, ISqlTemplteEngine sqlTemplteEngine) {
+        this.sqlTemplteEngine = sqlTemplteEngine;
+        this.load(inputStream);
     }
 
 
@@ -84,11 +101,16 @@ public class SqlsTplHolder {
     }
 
 
-    private void load() {
+    private void load(InputStream inputStream) {
         try {
             vars.clear();
             sqlTemplateCache.clear();
-            Document document = XmlUtils.loadDocument(resource);
+            Document document;
+            if (inputStream == null) {
+                document = XmlUtils.loadDocument(resource.getInputStream());
+            } else {
+                document = XmlUtils.loadDocument(inputStream);
+            }
             XmlUtils.setCache(document, "sql", "id", sqlTemplateCache);
             XmlUtils.setCache(document, "var", "name", vars);
         } catch (Exception e) {
@@ -104,11 +126,11 @@ public class SqlsTplHolder {
      * @return
      */
     private String getSqlTemplate(String id) {
-        if (DEVELOPER_MODE) {
+        if (DEVELOPER_MODE && resource != null) {
             File file = resource.getFile();
             if (updatetime != file.lastModified()) {
                 updatetime = file.lastModified();
-                this.load();
+                this.load(null);
             }
         }
         return sqlTemplateCache.get(id);

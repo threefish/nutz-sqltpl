@@ -19,8 +19,8 @@ public class PageDataDTO<T> {
         return count;
     }
 
-    public T getData() {
-        return data;
+    public <T> T getData() {
+        return (T) data;
     }
 
 }

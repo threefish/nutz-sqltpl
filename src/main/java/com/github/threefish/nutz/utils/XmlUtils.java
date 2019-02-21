@@ -4,7 +4,6 @@ import org.nutz.lang.Streams;
 import org.nutz.lang.Strings;
 import org.nutz.log.Log;
 import org.nutz.log.Logs;
-import org.nutz.resource.impl.FileResource;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -22,13 +21,14 @@ public class XmlUtils {
 
     private static final Log LOG = Logs.get();
 
+
     /**
      * 加载XML Document
      *
-     * @param resource 文件资源
+     * @param ins 资源文件流
      * @return 文档
      */
-    public static Document loadDocument(FileResource resource) {
+    public static Document loadDocument(InputStream ins) {
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             dbf.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false);
@@ -38,7 +38,6 @@ public class XmlUtils {
             dbf.setXIncludeAware(false);
             dbf.setExpandEntityReferences(false);
             DocumentBuilder builder = dbf.newDocumentBuilder();
-            InputStream ins = resource.getInputStream();
             Document document = builder.parse(ins);
             document.normalizeDocument();
             Streams.safeClose(ins);
