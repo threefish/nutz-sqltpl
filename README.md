@@ -1,6 +1,6 @@
 nutz-sqltpl SQL模板实现
 ==================================
-
+[源码](https://github.com/threefish/nutz-sqltpl)
 ### 支持多种模板引擎
 
 默认采用beetl引擎（注意,这不是与BeetlSql的集成），其他模版引擎可以自己扩展，详情看源码
@@ -13,6 +13,7 @@ nutz-sqltpl SQL模板实现
   <artifactId>nutz-sqltpl</artifactId>
   <version>1.3.RELEASE</version>
 </dependency>
+<!-- 正式版预计还有2小时同步至中央库，迫不及待的小伙伴可以先用快照版本试试 1.3-SNAPSHOT -->
 ```
 然后在ioc.js中
 ```javascript
