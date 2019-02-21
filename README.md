@@ -11,7 +11,7 @@ nutz-sqltpl SQL模板实现
 <dependency>
   <groupId>com.github.threefish</groupId>
   <artifactId>nutz-sqltpl</artifactId>
-  <version>1.0</version>
+  <version>1.3.RELEASE</version>
 </dependency>
 ```
 然后在ioc.js中
@@ -35,7 +35,7 @@ var ioc = {
 }
 ```
 
-然后，在MainSetup.init内加入下面的语句, 启用热加载
+然后，在MainSetup.init内加入下面的语句, 启用热加载(注意：JAR包中的xml无法进行热加载)
 
 ```java
 SqlsTplHolder.DEVELOPER_MODE = true;
