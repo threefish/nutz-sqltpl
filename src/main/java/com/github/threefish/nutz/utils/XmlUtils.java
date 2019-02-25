@@ -6,6 +6,7 @@ import org.nutz.log.Log;
 import org.nutz.log.Logs;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -63,9 +64,34 @@ public class XmlUtils {
                 Element element = (Element) nodeList.item(i);
                 if (element.hasAttribute(attrName) && Strings.isNotBlank(element.getAttribute(attrName))) {
                     String id = element.getAttribute(attrName);
-                    hashMap.put(id, element.getTextContent());
+                    hashMap.put(id, getContent(element));
                 }
             }
         }
+    }
+
+    /**
+     * 取得模版内容支持 exp 标签
+     *
+     * @param element
+     * @return
+     */
+    private static String getContent(Node element) {
+        NodeList childs = element.getChildNodes();
+        StringBuffer sb = new StringBuffer();
+        if (childs.getLength() > 0) {
+            for (int i = 0; i < childs.getLength(); i++) {
+                Node node = childs.item(i);
+                if ("#text".equals(node.getNodeName())) {
+                    sb.append(" " + Strings.sNull(node.getTextContent()).trim() + " ");
+                } else if ("exp".equals(node.getNodeName())) {
+                    sb.append("<exp>" + getContent(node) + "</exp>");
+                } else {
+                    sb.append(getContent(node));
+                }
+            }
+            return sb.toString();
+        }
+        return "";
     }
 }

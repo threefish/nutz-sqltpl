@@ -27,8 +27,8 @@ var ioc = {
                create: "init"
            },
            fields: {
-                statementStart : "[#",//可修改
-                statementEnd :"#]"//可修改
+                statementStart : "<exp>",//可修改(如需要使用xmltag的只支持<exp></exp> xml tag,不支持其他xml tag)
+                statementEnd :"</exp>"//可修改
             }
        }
     }
@@ -92,7 +92,7 @@ public class CompanyServiceImpl extends BaseServiceImpl<Company> implements Comp
 
 ```
 你需要一个XML文件来管理当前service的Sql（请把我和CompanyServiceImpl放在一起，或采用相对路径自己摸索）
-#### 当模版语法 [# if()... for()...等等 #] 取值表达式 ${}
+#### 当模版语法 <exp> if()... for()...等等 </exp> 取值表达式 ${}
 来看一下例子
 ```xml
    <?xml version="1.0" encoding="UTF-8"?>
@@ -100,11 +100,11 @@ public class CompanyServiceImpl extends BaseServiceImpl<Company> implements Comp
    <Sqls>
         <!--var是当前文件的共享变量，var中不能有表达式-->
        <var name="tableName">logistics_company</var>
-       <sql id="queryAll"><![CDATA[
+       <sql id="queryAll">
            SELECT * from ${tableName}
-           [# if(isNotEmpty(name)){ #]
+           <exp> if(isNotEmpty(name)){ </exp>
            where name like @name
-           [#}#]
-       ]]></sql>
+           <exp>}</exp>
+       </sql>
    </Sqls>
 ```

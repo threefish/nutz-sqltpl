@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Sqls SYSTEM "nutzfw-sqls.dtd">
+<Sqls>
+    <!--var是当前文件的共享变量，var中不能有表达式-->
+    <var name="tableName">logistics_company</var>
+    <sql id="queryAll">
+        SELECT * from ${tableName}
+        <exp>if(isNotEmpty(name)){</exp>
+        where name like @name and 1>0
+        <exp>}</exp>
+    </sql>
+</Sqls>

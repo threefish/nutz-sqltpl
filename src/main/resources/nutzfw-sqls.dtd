@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-
-        <!ELEMENT Sqls (sql|var)+>
+        <!ELEMENT Sqls (sql|var)>
         <!ATTLIST Sqls>
 
-        <!ELEMENT sql (#PCDATA)>
+        <!ELEMENT sql (exp|#PCDATA)>
+        <!ELEMENT exp (#PCDATA)>
         <!ATTLIST sql
                 id CDATA #REQUIRED>
         <!ELEMENT var (#PCDATA)>
         <!ATTLIST var
                 name CDATA #REQUIRED>
+
+
