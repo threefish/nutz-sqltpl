@@ -7,8 +7,6 @@
         <![CDATA[SELECT * from ${tableName} ]]>
         <exp><![CDATA[if(isNotEmpty(name)){ ]]></exp>
         <![CDATA[where name like @name and 1>0]]>
-        <exp><![CDATA[}]]></exp>
-        123123
-        123124
+        <exp>}</exp>
     </sql>
 </Sqls>
