@@ -125,6 +125,7 @@ public interface ISqlDaoExecuteService<T> {
      *
      * @param id    sqlxml中的唯一ID
      * @param param 查询参数
+     * @param <T>   实体类泛型
      * @return 单个实体类
      */
     default <T> T fetchEntityBySql(String id, NutMap param) {

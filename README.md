@@ -11,7 +11,7 @@ nutz-sqltpl SQL模板实现
 <dependency>
   <groupId>com.github.threefish</groupId>
   <artifactId>nutz-sqltpl</artifactId>
-  <version>1.3.RELEASE</version>
+  <version>1.3.1.RELEASE</version>
 </dependency>
 ```
 然后在ioc.js中
