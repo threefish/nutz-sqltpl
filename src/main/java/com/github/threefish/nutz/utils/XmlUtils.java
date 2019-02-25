@@ -13,6 +13,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 
 /**
  * @author 黄川 huchuc@vip.qq.com
@@ -78,19 +79,21 @@ public class XmlUtils {
      */
     private static String getContent(Node element) {
         NodeList childs = element.getChildNodes();
-        StringBuffer sb = new StringBuffer();
+        LinkedHashSet<String> sb = new LinkedHashSet();
         if (childs.getLength() > 0) {
             for (int i = 0; i < childs.getLength(); i++) {
                 Node node = childs.item(i);
                 if ("#text".equals(node.getNodeName())) {
-                    sb.append(" " + Strings.sNull(node.getTextContent()).trim() + " ");
+                    sb.add(node.getTextContent().trim());
                 } else if ("exp".equals(node.getNodeName())) {
-                    sb.append("<exp>" + getContent(node) + "</exp>");
+                    sb.add("<exp>" + getContent(node) + "</exp>");
+                } else if ("#cdata-section".equals(node.getNodeName())) {
+                    sb.add(node.getTextContent().trim());
                 } else {
-                    sb.append(getContent(node));
+                    sb.add(getContent(node));
                 }
             }
-            return sb.toString();
+            return Strings.join(" ", sb.toArray());
         }
         return "";
     }

@@ -4,9 +4,11 @@
     <!--var是当前文件的共享变量，var中不能有表达式-->
     <var name="tableName">logistics_company</var>
     <sql id="queryAll">
-        SELECT * from ${tableName}
-        <exp>if(isNotEmpty(name)){</exp>
-        where name like @name and 1>0
-        <exp>}</exp>
+        <![CDATA[SELECT * from ${tableName} ]]>
+        <exp><![CDATA[if(isNotEmpty(name)){ ]]></exp>
+        <![CDATA[where name like @name and 1>0]]>
+        <exp><![CDATA[}]]></exp>
+        123123
+        123124
     </sql>
 </Sqls>
