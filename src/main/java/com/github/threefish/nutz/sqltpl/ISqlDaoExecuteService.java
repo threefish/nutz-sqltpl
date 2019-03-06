@@ -161,4 +161,33 @@ public interface ISqlDaoExecuteService<T> {
         return updateBySql(id, param);
     }
 
+
+    /**
+     * 不分页查询列表
+     *
+     * @param id    sqlxml中的唯一ID
+     * @param param 查询参数
+     * @return 列表类型
+     */
+    default List<String> queryStrsBySql(String id, NutMap param) {
+        Sql sql = getSqlsTplHolder().getSql(id, param);
+        sql.setCallback(Sqls.callback.strs());
+        getDao().execute(sql);
+        return sql.getList(String.class);
+    }
+
+    /**
+     * 计数查询
+     *
+     * @param id    sqlxml中的唯一ID
+     * @param param 查询参数
+     * @return 数字
+     */
+    default long queryLongBySql(String id, NutMap param) {
+        Sql sql = getSqlsTplHolder().getSql(id, param);
+        sql.setCallback(Sqls.callback.integer());
+        getDao().execute(sql);
+        return sql.getLong();
+    }
+
 }
