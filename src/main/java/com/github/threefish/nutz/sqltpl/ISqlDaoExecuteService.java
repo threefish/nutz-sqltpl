@@ -177,6 +177,20 @@ public interface ISqlDaoExecuteService<T> {
     }
 
     /**
+     * 不分页查询列表
+     *
+     * @param id    sqlxml中的唯一ID
+     * @param param 查询参数
+     * @return 列表类型
+     */
+    default List<Integer> queryIntsBySql(String id, NutMap param) {
+        Sql sql = getSqlsTplHolder().getSql(id, param);
+        sql.setCallback(Sqls.callback.ints());
+        getDao().execute(sql);
+        return sql.getList(Integer.class);
+    }
+
+    /**
      * 计数查询
      *
      * @param id    sqlxml中的唯一ID
