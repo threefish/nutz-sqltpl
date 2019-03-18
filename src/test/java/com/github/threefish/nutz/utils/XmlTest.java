@@ -1,8 +1,10 @@
 package com.github.threefish.nutz.utils;
 
+import com.github.threefish.nutz.sqltpl.BeetlSqlTemplteEngineImpl;
+import com.github.threefish.nutz.sqltpl.ISqlTemplteEngine;
+import org.junit.Assert;
 import org.junit.Test;
-import org.nutz.json.Json;
-import org.nutz.json.JsonFormat;
+import org.nutz.lang.util.NutMap;
 import org.w3c.dom.Document;
 
 import java.io.InputStream;
@@ -15,12 +17,14 @@ import java.util.HashMap;
 public class XmlTest {
 
     @Test
-    public void loadXMl() {
-        InputStream in = this.getClass().getResourceAsStream("/test1.xml");
+    public void testBeetl() {
+        InputStream in = this.getClass().getResourceAsStream("/testBeetl.xml");
         Document document = XmlUtils.loadDocument(in);
         HashMap<String, String> cache = new HashMap<>();
         XmlUtils.setCache(document, "sql", "id", cache);
-        String json = Json.toJson(cache, JsonFormat.compact());
-        assert "{\"queryAll\":\" SELECT * from ${tableName} <exp>if(isNotEmpty(name)){</exp> where name like @name and 1>0 <exp>}</exp>\"}".equals(json);
+        ISqlTemplteEngine engine = new BeetlSqlTemplteEngineImpl();
+        ((BeetlSqlTemplteEngineImpl) engine).init();
+        String sql = engine.render(cache.getOrDefault("queryAll", ""), NutMap.NEW().setv("tableName", "table_a").setv("name", "aaa"));
+        Assert.assertTrue(("SELECT * from table_a  where name like @name and 1>0".equals(sql)));
     }
 }

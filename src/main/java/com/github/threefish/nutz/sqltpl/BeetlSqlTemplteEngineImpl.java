@@ -6,6 +6,8 @@ import org.beetl.core.Template;
 import org.beetl.core.exception.BeetlException;
 import org.beetl.core.resource.StringTemplateResourceLoader;
 import org.nutz.ioc.loader.annotation.IocBean;
+import org.nutz.lang.Strings;
+import org.nutz.lang.Times;
 
 import java.io.IOException;
 import java.util.Map;
@@ -18,8 +20,8 @@ import java.util.Map;
 public class BeetlSqlTemplteEngineImpl implements ISqlTemplteEngine {
 
     GroupTemplate gt;
-    String statementStart = "[#";
-    String statementEnd = "#]";
+    String statementStart = "<exp>";
+    String statementEnd = "</exp>";
 
     public void setStatementStart(String statementStart) {
         this.statementStart = statementStart;
@@ -36,6 +38,8 @@ public class BeetlSqlTemplteEngineImpl implements ISqlTemplteEngine {
             cfg.setStatementEnd(statementEnd);
             cfg.setHtmlTagSupport(false);
             gt = new GroupTemplate(new StringTemplateResourceLoader(), cfg);
+            gt.registerFunctionPackage("Strings", Strings.class);
+            gt.registerFunctionPackage("Times", Times.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -52,6 +56,6 @@ public class BeetlSqlTemplteEngineImpl implements ISqlTemplteEngine {
     public String render(String templeText, Map bindData) throws BeetlException {
         Template template = gt.getTemplate(templeText);
         template.binding(bindData);
-        return template.render();
+        return template.render().trim();
     }
 }

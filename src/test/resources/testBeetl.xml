@@ -5,7 +5,7 @@
     <var name="tableName">logistics_company</var>
     <sql id="queryAll">
         <![CDATA[SELECT * from ${tableName} ]]>
-        <exp><![CDATA[if(isNotEmpty(name)){ ]]></exp>
+        <exp><![CDATA[if(Strings.isNotBlank(name)){ ]]></exp>
         <![CDATA[where name like @name and 1>0]]>
         <exp>}</exp>
     </sql>
