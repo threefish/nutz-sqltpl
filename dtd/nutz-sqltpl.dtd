@@ -6,6 +6,10 @@
         <!ELEMENT exp (#PCDATA)>
         <!ATTLIST sql
                 id CDATA #REQUIRED>
+        <!ATTLIST sql
+                wrap CDATA #PCDATA>
         <!ELEMENT var (#PCDATA)>
         <!ATTLIST var
                 name CDATA #REQUIRED>
+
+
