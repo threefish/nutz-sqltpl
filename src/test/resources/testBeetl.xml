@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE Sqls SYSTEM "nutz-sqls.dtd">
+<!DOCTYPE Sqls PUBLIC "nutz-sqltpl"
+        "https://nutzam.com/dtd/nutz-sqltpl.dtd">
 <Sqls>
     <!--var是当前文件的共享变量，var中不能有表达式-->
     <var name="tableName">logistics_company</var>
