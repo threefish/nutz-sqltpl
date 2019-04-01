@@ -65,7 +65,12 @@ public class XmlUtils {
                 Element element = (Element) nodeList.item(i);
                 if (element.hasAttribute(attrName) && Strings.isNotBlank(element.getAttribute(attrName))) {
                     String id = element.getAttribute(attrName);
-                    hashMap.put(id, getContent(element));
+                    boolean wrap = Boolean.parseBoolean(element.getAttribute("wrap"));
+                    if (wrap) {
+                        hashMap.put(id, getContent(element).replace("\n", ""));
+                    } else {
+                        hashMap.put(id, getContent(element));
+                    }
                 }
             }
         }
@@ -83,16 +88,17 @@ public class XmlUtils {
         if (childs.getLength() > 0) {
             for (int i = 0; i < childs.getLength(); i++) {
                 Node node = childs.item(i);
-                if ("#text".equals(node.getNodeName())) {
+                if (node.getNodeType() == Node.TEXT_NODE) {
                     sb.add(node.getTextContent().trim());
                 } else if ("exp".equals(node.getNodeName())) {
                     sb.add("<exp>" + getContent(node) + "</exp>");
-                } else if ("#cdata-section".equals(node.getNodeName())) {
+                } else if (node.getNodeType() == Node.CDATA_SECTION_NODE) {
                     sb.add(node.getTextContent().trim());
                 } else {
                     sb.add(getContent(node));
                 }
             }
+            sb.stream().filter(s -> Strings.isNotBlank(s)).forEach(s -> s.replace("\\n", ""));
             return Strings.join(" ", sb.toArray());
         }
         return "";

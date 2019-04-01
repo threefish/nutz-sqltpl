@@ -5,9 +5,21 @@
     <!--var是当前文件的共享变量，var中不能有表达式-->
     <var name="tableName">logistics_company</var>
     <sql id="queryAll">
-        <![CDATA[SELECT * from ${tableName} ]]>
+        <![CDATA[SELECT * from ${tableName}]]>
         <exp><![CDATA[if(Strings.isNotBlank(name)){ ]]></exp>
         <![CDATA[where name like @name and 1>0]]>
         <exp>}</exp>
+    </sql>
+    <!--wrap=true 清除\n 换行符 -->
+    <sql id="wrapLine" wrap="true">
+        <![CDATA[SELECT * from ${tableName} "实打实的哈桑\n撒大苏
+        打的撒的哈" ]]>
+        <exp><![CDATA[if(Strings.isNotBlank(name)){ ]]></exp>
+        <![CDATA[where name like
+        @name and 1>0]]>
+        <exp>}</exp>
+        fsadf
+        sdfasdf
+        sdf
     </sql>
 </Sqls>
