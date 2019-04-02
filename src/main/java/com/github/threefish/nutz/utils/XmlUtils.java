@@ -67,7 +67,7 @@ public class XmlUtils {
                     String id = element.getAttribute(attrName);
                     boolean wrap = Boolean.parseBoolean(element.getAttribute("wrap"));
                     if (wrap) {
-                        hashMap.put(id, getContent(element).replace("\n", ""));
+                        hashMap.put(id, getContent(element).replace("\n", " "));
                     } else {
                         hashMap.put(id, getContent(element));
                     }
@@ -98,8 +98,7 @@ public class XmlUtils {
                     sb.add(getContent(node));
                 }
             }
-            sb.stream().filter(s -> Strings.isNotBlank(s)).forEach(s -> s.replace("\\n", ""));
-            return Strings.join(" ", sb.toArray());
+            return Strings.join(" ", sb.toArray()).trim();
         }
         return "";
     }
