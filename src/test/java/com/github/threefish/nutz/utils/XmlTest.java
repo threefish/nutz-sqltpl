@@ -25,6 +25,8 @@ public class XmlTest {
         ISqlTemplteEngine engine = new BeetlSqlTemplteEngineImpl();
         ((BeetlSqlTemplteEngineImpl) engine).init();
         String sql = engine.render(cache.getOrDefault("queryAll", ""), NutMap.NEW().setv("tableName", "table_a").setv("name", "aaa"));
+        String wrapLine = engine.render(cache.getOrDefault("wrapLine", ""), NutMap.NEW().setv("tableName", "table_a").setv("name", "aaa"));
         Assert.assertTrue(("SELECT * from table_a  where name like @name and 1>0".equals(sql)));
+        Assert.assertTrue(("SELECT * from table_a \"实打实的哈桑\\n撒大苏        打的撒的哈\"  where name like        @name and 1>0  fsadf        sdfasdf        sdf".equals(wrapLine)));
     }
 }
