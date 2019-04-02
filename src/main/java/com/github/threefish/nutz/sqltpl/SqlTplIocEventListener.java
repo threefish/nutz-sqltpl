@@ -22,6 +22,7 @@ import java.net.URLDecoder;
 public class SqlTplIocEventListener implements IocEventListener {
     private static final Log LOG = Logs.get();
     private static final String JAR = "jar";
+    private static final String XML = ".xml";
     private Ioc ioc;
 
     public SqlTplIocEventListener(Ioc ioc) {
@@ -38,7 +39,8 @@ public class SqlTplIocEventListener implements IocEventListener {
         Class klass = obj.getClass();
         SqlsXml sqls = (SqlsXml) klass.getAnnotation(SqlsXml.class);
         if (sqls != null) {
-            SqlsTplHolder holder = getSqlsTplHolder(klass, sqls.value(), ioc.getByType(sqls.klass()));
+            String xmlName = getXmlName(klass);
+            SqlsTplHolder holder = getSqlsTplHolder(klass, xmlName, ioc.getByType(sqls.klass()));
             Field[] fields = klass.getDeclaredFields();
             for (Field field : fields) {
                 if (field.getType() == SqlsTplHolder.class) {
@@ -46,7 +48,7 @@ public class SqlTplIocEventListener implements IocEventListener {
                         field.setAccessible(true);
                         field.set(obj, holder);
                     } catch (IllegalAccessException e) {
-                        e.printStackTrace();
+                        LOG.error(e);
                     }
                 }
             }
@@ -57,6 +59,11 @@ public class SqlTplIocEventListener implements IocEventListener {
     @Override
     public int getOrder() {
         return 0;
+    }
+
+    private String getXmlName(Class klass) {
+        SqlsXml sqls = (SqlsXml) klass.getAnnotation(SqlsXml.class);
+        return "".equals(sqls.value()) ? klass.getSimpleName().concat(XML) : sqls.value();
     }
 
     /**

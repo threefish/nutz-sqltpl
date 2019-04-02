@@ -14,10 +14,12 @@ public @interface SqlsXml {
 
     /**
      * 文件相对与当前service类路径
+     * <p>
+     * 默认为java文件名以.xml结尾 如（UserServicesImpl.java 对应 UserServicesImpl.xml）
      *
      * @return xml文件路径
      */
-    String value();
+    String value() default "";
 
     /**
      * 模版类 (模版类需要放到IOC中进行管理)

@@ -1,5 +1,6 @@
 nutz-sqltpl SQL模板实现
 ==================================
+### 配合[NutzCodeInsight](https://plugins.jetbrains.com/plugin/10311-nutzcodeinsight)插件使用更香
 [源码](https://github.com/threefish/nutz-sqltpl)
 ### 支持多种模板引擎
 
@@ -11,7 +12,6 @@ nutz-sqltpl SQL模板实现
 <dependency>
   <groupId>com.github.threefish</groupId>
   <artifactId>nutz-sqltpl</artifactId>
-  <version>1.3.3.RELEASE</version>
 </dependency>
 ```
 然后在ioc.js中
@@ -96,11 +96,13 @@ public class CompanyServiceImpl extends BaseServiceImpl<Company> implements Comp
 来看一下例子
 ```xml
    <?xml version="1.0" encoding="UTF-8"?>
-   <!DOCTYPE Sqls SYSTEM "nutzfw-sqls.dtd">
+   <!DOCTYPE Sqls PUBLIC "nutz-sqltpl"
+           "https://threefish.gitee.io/nutz-sqltpl/nutz-sqltpl.dtd">
    <Sqls>
         <!--var是当前文件的共享变量，var中不能有表达式-->
        <var name="tableName">logistics_company</var>
-       <sql id="queryAll">
+       <!--wrap=true 表示将会清除换行符\n 默认不清除-->
+       <sql id="queryAll" wrap="true">
            SELECT * from ${tableName}
            <exp> if(isNotEmpty(name)){ </exp>
            where name like @name
