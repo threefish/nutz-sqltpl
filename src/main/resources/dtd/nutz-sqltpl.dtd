@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
         <!ELEMENT Sqls (sql|var)>
         <!ATTLIST Sqls>
-
+        <!ATTLIST Sqls
+                class CDATA #PCDATA>
         <!ELEMENT sql (exp|#PCDATA)>
         <!ELEMENT exp (#PCDATA)>
         <!ATTLIST sql
