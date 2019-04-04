@@ -110,3 +110,4 @@ public class CompanyServiceImpl extends BaseServiceImpl<Company> implements Comp
        </sql>
    </Sqls>
 ```
+![NutzCodeInsight](https://github.com/threefish/NutzCodeInsight/raw/master/image/NutzSqlTpl.gif)
