@@ -194,8 +194,6 @@ public interface ISqlDaoExecuteService<T> {
         return queryLongBySql(id, param, null);
     }
 
-//    123
-
     /**
      * 分页查询列表
      *
@@ -299,7 +297,7 @@ public interface ISqlDaoExecuteService<T> {
     default int updateBySql(String id, NutMap param, Cnd cnd) {
         Sql sql = getSql(id, param, cnd, Sqls.callback.integer());
         getDao().execute(sql);
-        return sql.getInt();
+        return sql.getUpdateCount();
     }
 
     /**
@@ -354,7 +352,7 @@ public interface ISqlDaoExecuteService<T> {
     default long queryLongBySql(String id, NutMap param, Cnd cnd) {
         Sql sql = getSql(id, param, cnd, Sqls.callback.integer());
         getDao().execute(sql);
-        return sql.getLong();
+        return sql.getLong(0);
     }
 
 

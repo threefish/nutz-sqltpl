@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
         <!ELEMENT Sqls (sql|var)>
+
         <!ATTLIST Sqls>
         <!ATTLIST Sqls
-                class CDATA #PCDATA>
+                class CDATA (#IMPLIED)>
         <!ELEMENT sql (exp|#PCDATA)>
+
         <!ELEMENT exp (#PCDATA)>
         <!ATTLIST sql
-                id CDATA #REQUIRED>
+                id CDATA (#REQUIRED)>
+
         <!ATTLIST sql
-                wrap CDATA #PCDATA>
+                wrap CDATA (#PCDATA)>
+
         <!ELEMENT var (#PCDATA)>
         <!ATTLIST var
-                name CDATA #REQUIRED>
+                name CDATA (#REQUIRED)>
