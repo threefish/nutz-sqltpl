@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE Sqls PUBLIC "nutz-sqltpl"
-        "https://threefish.gitee.io/nutz-sqltpl/nutz-sqltpl.dtd">
+<!DOCTYPE Sqls SYSTEM "nutz-sqltpl.dtd">
 <Sqls>
     <!--var是当前文件的共享变量，var中不能有表达式-->
     <var name="tableName">logistics_company</var>
     <sql id="queryAll">
-        <![CDATA[SELECT * from ${tableName}]]>
-        <exp><![CDATA[if(Strings.isNotBlank(name)){ ]]></exp>
-        <![CDATA[where name like @name and 1>0]]>
+        SELECT * from ${tableName}
+        <exp><![CDATA[
+            if(Strings.isNotBlank(name)&&1==1){
+            ]]></exp>
+        where name like @name and 1>0
         <exp>}</exp>
     </sql>
     <!--wrap=true 清除\n 换行符 -->
     <sql id="wrapLine" wrap="true">
         <![CDATA[SELECT * from ${tableName} "实打实的哈桑\n撒大苏
         打的撒的哈" ]]>
-        <exp><![CDATA[if(Strings.isNotBlank(name)){ ]]></exp>
+        <exp><![CDATA[
+            if(Strings.isNotBlank(name)){
+            ]]></exp>
         <![CDATA[where name like
         @name and 1>0]]>
         <exp>}</exp>
