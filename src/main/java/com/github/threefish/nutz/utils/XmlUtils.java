@@ -12,8 +12,8 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 
 /**
  * @author 黄川 huchuc@vip.qq.com
@@ -85,7 +85,7 @@ public class XmlUtils {
      */
     private static String getContent(Node element) {
         NodeList childs = element.getChildNodes();
-        LinkedHashSet<String> sb = new LinkedHashSet();
+        ArrayList<String> sb = new ArrayList();
         if (childs.getLength() > 0) {
             for (int i = 0; i < childs.getLength(); i++) {
                 Node node = childs.item(i);

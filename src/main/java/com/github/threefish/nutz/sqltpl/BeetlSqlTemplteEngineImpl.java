@@ -40,6 +40,9 @@ public class BeetlSqlTemplteEngineImpl implements ISqlTemplteEngine {
             gt = new GroupTemplate(new StringTemplateResourceLoader(), cfg);
             gt.registerFunctionPackage("Strings", Strings.class);
             gt.registerFunctionPackage("Times", Times.class);
+            gt.setErrorHandler((beeExceptionos, writer) -> {
+                throw beeExceptionos;
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -57,5 +60,14 @@ public class BeetlSqlTemplteEngineImpl implements ISqlTemplteEngine {
         Template template = gt.getTemplate(templeText);
         template.binding(bindData);
         return template.render().trim();
+    }
+
+    /**
+     * 取得后可以注册很多方法或函数等等
+     *
+     * @return
+     */
+    public GroupTemplate getGt() {
+        return gt;
     }
 }
