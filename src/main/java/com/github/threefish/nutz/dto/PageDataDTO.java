@@ -6,8 +6,13 @@ package com.github.threefish.nutz.dto;
  */
 public class PageDataDTO<T> {
 
+    /**
+     * 返回数据总数
+     */
     private Long count;
-
+    /**
+     * 返回数据
+     */
     private T data;
 
     public PageDataDTO(Long count, T data) {
