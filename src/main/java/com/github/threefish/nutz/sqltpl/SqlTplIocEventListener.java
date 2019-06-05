@@ -1,5 +1,6 @@
 package com.github.threefish.nutz.sqltpl;
 
+import com.github.threefish.nutz.error.NutzSqlTemplateXmlNotFoundError;
 import org.nutz.ioc.Ioc;
 import org.nutz.ioc.IocEventListener;
 import org.nutz.ioc.loader.annotation.IocBean;
@@ -79,7 +80,8 @@ public class SqlTplIocEventListener implements IocEventListener {
         try {
             if (url != null) {
                 if (JAR.equals(url.getProtocol())) {
-                    return new SqlsTplHolder(klass.getClassLoader().getResourceAsStream(xmlPath), sqlTemplteEngine);
+                    return new SqlsTplHolder(new JarResource(klass, xmlPath, new File(klass.getProtectionDomain().getCodeSource().getLocation().getPath())),
+                            sqlTemplteEngine);
                 } else {
                     File file = new File(URLDecoder.decode(url.getFile(), Encoding.defaultEncoding()));
                     if (file.exists()) {
@@ -89,7 +91,8 @@ public class SqlTplIocEventListener implements IocEventListener {
             }
         } catch (UnsupportedEncodingException e) {
             LOG.error(e);
+            throw new NutzSqlTemplateXmlNotFoundError(e);
         }
-        throw new RuntimeException(String.format("sqls xml [%s] is not exists!!!", fileName));
+        throw new NutzSqlTemplateXmlNotFoundError(String.format("sqls xml [%s] is not exists!!!", fileName));
     }
 }
