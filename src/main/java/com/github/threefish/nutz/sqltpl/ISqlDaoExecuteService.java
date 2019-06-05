@@ -50,9 +50,10 @@ public interface ISqlDaoExecuteService<T> {
     /**
      * 取得Sql
      *
-     * @param id    sqlxml中的唯一ID
-     * @param param 查询参数
-     * @param cnd   为 SQL 增加条件，SQL 必须有 '$condition' 变量
+     * @param id       sqlxml中的唯一ID
+     * @param param    查询参数
+     * @param cnd      为 SQL 增加条件，SQL 必须有 '$condition' 变量
+     * @param callback 自定义callback
      * @return sql
      */
     default Sql getSql(String id, NutMap param, Cnd cnd, SqlCallback callback) {

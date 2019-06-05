@@ -65,7 +65,7 @@ public class BeetlSqlTemplteEngineImpl implements ISqlTemplteEngine {
     /**
      * 取得后可以注册很多方法或函数等等
      *
-     * @return
+     * @return GroupTemplate
      */
     public GroupTemplate getGt() {
         return gt;

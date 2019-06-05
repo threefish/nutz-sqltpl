@@ -5,10 +5,12 @@ import java.io.InputStream;
 
 /**
  * @author huchuc@vip.qq.com
- * @date: 2019/6/5
+ * <p>Date: 2019/06/05</p>
  */
 public class JarResource {
-
+    /**
+     * 类
+     */
     Class klass;
 
     /**

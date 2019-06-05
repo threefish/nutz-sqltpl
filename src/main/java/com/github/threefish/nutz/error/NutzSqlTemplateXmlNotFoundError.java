@@ -2,7 +2,7 @@ package com.github.threefish.nutz.error;
 
 /**
  * @author huchuc@vip.qq.com
- * @date: 2019/6/5
+ * <p>Date: 2019/06/05</p>
  */
 public class NutzSqlTemplateXmlNotFoundError extends RuntimeException {
 
