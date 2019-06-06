@@ -6,7 +6,10 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.nutz.lang.util.NutMap;
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 
@@ -17,7 +20,7 @@ import java.util.HashMap;
 public class XmlTest {
 
     @Test
-    public void testBeetl() {
+    public void testBeetl() throws ParserConfigurationException, SAXException, IOException {
         InputStream in = this.getClass().getResourceAsStream("/testBeetl.xml");
         Document document = XmlUtils.loadDocument(in);
         HashMap<String, String> cache = new HashMap<>();

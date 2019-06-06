@@ -1,7 +1,9 @@
 package com.github.threefish.nutz.sqltpl;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 /**
  * @author huchuc@vip.qq.com
@@ -9,28 +11,21 @@ import java.io.InputStream;
  */
 public class JarResource {
     /**
-     * 类
-     */
-    Class klass;
-
-    /**
-     * xml路径
-     */
-    String xmlPath;
-
-    /**
      * jar文件（通过jar文件的修改时间判断是否重新加载xml文件）
      */
     File jarFile;
+    /**
+     * xml资源路径
+     */
+    URL xmlFileUrl;
 
-    public JarResource(Class klass, String xmlPath, File jarFile) {
-        this.klass = klass;
-        this.xmlPath = xmlPath;
+    public JarResource(URL xmlFileUrl, File jarFile) {
         this.jarFile = jarFile;
+        this.xmlFileUrl = xmlFileUrl;
     }
 
-    public InputStream getInputStream() {
-        return klass.getClassLoader().getResourceAsStream(xmlPath);
+    public InputStream getInputStream() throws IOException {
+        return xmlFileUrl.openStream();
     }
 
     public File getJarFile() {

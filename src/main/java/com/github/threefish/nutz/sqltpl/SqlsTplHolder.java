@@ -57,7 +57,7 @@ public class SqlsTplHolder {
     /**
      * 普通文件情况下
      *
-     * @param fileResource         xml文件资源
+     * @param fileResource     xml文件资源
      * @param sqlTemplteEngine SQL模版引擎
      */
     public SqlsTplHolder(FileResource fileResource, ISqlTemplteEngine sqlTemplteEngine) {
@@ -112,7 +112,7 @@ public class SqlsTplHolder {
     }
 
 
-    private void load() {
+    private final void load() {
         try {
             vars.clear();
             sqlTemplateCache.clear();

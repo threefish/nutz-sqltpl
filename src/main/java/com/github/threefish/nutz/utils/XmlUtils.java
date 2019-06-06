@@ -2,15 +2,16 @@ package com.github.threefish.nutz.utils;
 
 import org.nutz.lang.Streams;
 import org.nutz.lang.Strings;
-import org.nutz.log.Log;
-import org.nutz.log.Logs;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,34 +22,31 @@ import java.util.HashMap;
  */
 public class XmlUtils {
 
-    private static final Log LOG = Logs.get();
-
 
     /**
      * 加载XML Document
      *
-     * @param ins 资源文件流
+     * @param xmlInputStream 资源文件流
      * @return 文档
      */
-    public static Document loadDocument(InputStream ins) {
-        try {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false);
-            factory.setFeature("http://xml.org/sax/features/external-general-entities", false);
-            factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
-            factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
-            factory.setXIncludeAware(false);
-            factory.setExpandEntityReferences(false);
-            factory.setIgnoringElementContentWhitespace(true);
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document document = builder.parse(ins);
-            document.normalizeDocument();
-            Streams.safeClose(ins);
-            return document;
-        } catch (Exception e) {
-            LOG.error(e);
+    public static Document loadDocument(InputStream xmlInputStream) throws IOException, SAXException, ParserConfigurationException {
+        if (xmlInputStream == null) {
+            throw new RuntimeException("资源文件流是 null，请检查！！！");
         }
-        return null;
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false);
+        factory.setFeature("http://xml.org/sax/features/external-general-entities", false);
+        factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+        factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+        factory.setXIncludeAware(false);
+        factory.setExpandEntityReferences(false);
+        factory.setIgnoringElementContentWhitespace(true);
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document document = builder.parse(xmlInputStream);
+        document.normalizeDocument();
+        Streams.safeClose(xmlInputStream);
+        return document;
+
     }
 
     /**

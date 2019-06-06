@@ -80,7 +80,7 @@ public class SqlTplIocEventListener implements IocEventListener {
         try {
             if (url != null) {
                 if (JAR.equals(url.getProtocol())) {
-                    return new SqlsTplHolder(new JarResource(klass, xmlPath, new File(klass.getProtectionDomain().getCodeSource().getLocation().getPath())),
+                    return new SqlsTplHolder(new JarResource(url, new File(klass.getProtectionDomain().getCodeSource().getLocation().getPath())),
                             sqlTemplteEngine);
                 } else {
                     File file = new File(URLDecoder.decode(url.getFile(), Encoding.defaultEncoding()));
