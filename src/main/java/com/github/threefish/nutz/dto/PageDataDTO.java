@@ -1,5 +1,7 @@
 package com.github.threefish.nutz.dto;
 
+import java.util.List;
+
 /**
  * @author 黄川 huchuc@vip.qq.com
  * <p>Date: 2019/2/20</p>
@@ -13,9 +15,9 @@ public class PageDataDTO<T> {
     /**
      * 返回数据
      */
-    private T data;
+    private List<T> data;
 
-    public PageDataDTO(Long count, T data) {
+    public PageDataDTO(Long count, List<T> data) {
         this.count = count;
         this.data = data;
     }
@@ -24,8 +26,15 @@ public class PageDataDTO<T> {
         return count;
     }
 
-    public <T> T getData() {
-        return (T) data;
+    public List<T> getData() {
+        return data;
     }
 
+    @Override
+    public String toString() {
+        return "PageDataDTO{" +
+                "count=" + count +
+                ", data=" + data +
+                '}';
+    }
 }
