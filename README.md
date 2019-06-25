@@ -37,7 +37,7 @@ var ioc = {
 }
 ```
 
-然后，在MainSetup.init内加入下面的语句, 启用热加载(注意：JAR包中的xml无法进行热加载)
+然后，在MainSetup.init内加入下面的语句, 启用热加载
 
 ```java
 SqlsTplHolder.DEVELOPER_MODE = true;
