@@ -87,8 +87,20 @@ public interface ISqlDaoExecuteService<T> {
      * @return 列表实体类型
      */
     default PageDataDTO queryEntityBySql(String id, NutMap param, Pager pager) {
+        return queryEntityBySql(id, param, null, pager, getEntityClass());
+    }
+
+    /**
+     * 分页查询列表实体
+     *
+     * @param id    sqlxml中的唯一ID
+     * @param param 查询参数
+     * @param pager 分页参数
+     * @return 列表实体类型
+     */
+    default PageDataDTO queryEntityBySql(String id, NutMap param, Pager pager, Class entityClass) {
         Sql sql = getSql(id, param, null, Sqls.callback.entities());
-        sql.setEntity(getEntity());
+        sql.setEntity(getDao().getEntity(entityClass));
         sql.setPager(pager);
         getDao().execute(sql);
         return queryEntityBySql(id, param, null, pager);
@@ -222,9 +234,23 @@ public interface ISqlDaoExecuteService<T> {
      * @return 列表实体类型
      */
     default PageDataDTO queryEntityBySql(String id, NutMap param, Cnd cnd, Pager pager) {
+        return queryEntityBySql(id, param, cnd, pager, getEntityClass());
+    }
+
+    /**
+     * 分页查询列表实体
+     *
+     * @param id          sqlxml中的唯一ID
+     * @param param       查询参数
+     * @param cnd         cnd 不为Null时 SQL 必须有 '$condition' 变量
+     * @param pager       分页参数
+     * @param entityClass 实体类型
+     * @return 列表实体类型
+     */
+    default PageDataDTO queryEntityBySql(String id, NutMap param, Cnd cnd, Pager pager, Class entityClass) {
         Sql sql = getSql(id, param, cnd, Sqls.callback.entities());
         long count = Daos.queryCount(getDao(), sql);
-        sql.setEntity(getEntity());
+        sql.setEntity(getDao().getEntity(entityClass));
         sql.setPager(pager);
         getDao().execute(sql);
         return new PageDataDTO(count, sql.getList(getEntityClass()));
@@ -253,10 +279,35 @@ public interface ISqlDaoExecuteService<T> {
      * @return 列表实体类型
      */
     default List<T> queryEntityBySql(String id, NutMap param, Cnd cnd) {
+        return queryEntityBySql(id, param, cnd, getEntityClass());
+    }
+
+    /**
+     * 不分页查询列表实体
+     *
+     * @param id          sqlxml中的唯一ID
+     * @param param       查询参数
+     * @param entityClass 指定实体类型
+     * @return 列表实体类型
+     */
+    default List<T> queryEntityBySql(String id, NutMap param, Class entityClass) {
+        return queryEntityBySql(id, param, (Cnd) null, entityClass);
+    }
+
+    /**
+     * 不分页查询列表实体
+     *
+     * @param id          sqlxml中的唯一ID
+     * @param param       查询参数
+     * @param cnd         cnd 不为Null时 SQL 必须有 '$condition' 变量
+     * @param entityClass 指定实体类型
+     * @return 列表实体类型
+     */
+    default List<T> queryEntityBySql(String id, NutMap param, Cnd cnd, Class entityClass) {
         Sql sql = getSql(id, param, cnd, Sqls.callback.entities());
-        sql.setEntity(getEntity());
+        sql.setEntity(getDao().getEntity(entityClass));
         getDao().execute(sql);
-        return sql.getList(getEntityClass());
+        return sql.getList(entityClass);
     }
 
     /**
@@ -283,10 +334,24 @@ public interface ISqlDaoExecuteService<T> {
      * @return 单个实体类
      */
     default <T> T fetchEntityBySql(String id, NutMap param, Cnd cnd) {
+        return fetchEntityBySql(id, param, cnd, getEntityClass());
+    }
+
+    /**
+     * 获取单个
+     *
+     * @param id          sqlxml中的唯一ID
+     * @param param       查询参数
+     * @param cnd         cnd 不为Null时 SQL 必须有 '$condition' 变量
+     * @param entityClass 指定实体类型
+     * @param <T>         实体类泛型
+     * @return 单个实体类
+     */
+    default <T> T fetchEntityBySql(String id, NutMap param, Cnd cnd, Class entityClass) {
         Sql sql = getSql(id, param, cnd, Sqls.callback.entity());
-        sql.setEntity(getEntity());
+        sql.setEntity(getDao().getEntity(entityClass));
         getDao().execute(sql);
-        return (T) sql.getObject(getEntityClass());
+        return (T) sql.getObject(entityClass);
     }
 
     /**
