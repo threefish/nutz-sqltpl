@@ -1,7 +1,7 @@
 package com.github.threefish.nutz.utils;
 
-import com.github.threefish.nutz.sqltpl.BeetlSqlTemplteEngineImpl;
-import com.github.threefish.nutz.sqltpl.ISqlTemplteEngine;
+import com.github.threefish.nutz.sqltpl.templte.beetl.BeetlSqlTemplteEngineImpl;
+import com.github.threefish.nutz.sqltpl.service.ISqlTemplteEngine;
 import org.junit.Assert;
 import org.junit.Test;
 import org.nutz.lang.util.NutMap;

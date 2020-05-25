@@ -1,5 +1,6 @@
-package com.github.threefish.nutz.sqltpl;
+package com.github.threefish.nutz.sqltpl.templte.beetl;
 
+import com.github.threefish.nutz.sqltpl.service.ISqlTemplteEngine;
 import org.beetl.core.Configuration;
 import org.beetl.core.GroupTemplate;
 import org.beetl.core.Template;

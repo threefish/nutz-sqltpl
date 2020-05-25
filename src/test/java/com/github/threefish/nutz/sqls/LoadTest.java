@@ -1,6 +1,6 @@
 package com.github.threefish.nutz.sqls;
 
-import com.github.threefish.nutz.sqltpl.SqlsXml;
+import com.github.threefish.nutz.sqltpl.annotation.SqlsXml;
 import org.junit.Assert;
 import org.junit.Test;
 

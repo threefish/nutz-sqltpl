@@ -1,6 +1,7 @@
-package com.github.threefish.nutz.sqltpl;
+package com.github.threefish.nutz.sqltpl.service;
 
-import com.github.threefish.nutz.dto.PageDataDTO;
+import com.github.threefish.nutz.sqltpl.SqlsTplHolder;
+import com.github.threefish.nutz.sqltpl.dto.PageDataDTO;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
 import org.nutz.dao.Sqls;
@@ -57,7 +58,7 @@ public interface ISqlDaoExecuteService<T> {
      * @return sql
      */
     default Sql getSql(String id, NutMap param, Cnd cnd, SqlCallback callback) {
-        Sql sql = getSqlsTplHolder().getSql(id, param);
+        Sql sql = Sqls.create(getSqlsTplHolder().getSql(id, param));
         sql.setCallback(callback);
         if (cnd != null) {
             sql.setCondition(cnd);

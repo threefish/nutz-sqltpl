@@ -1,4 +1,4 @@
-package com.github.threefish.nutz.error;
+package com.github.threefish.nutz.sqltpl.exception;
 
 /**
  * @author huchuc@vip.qq.com
