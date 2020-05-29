@@ -1,6 +1,6 @@
 package com.github.threefish.nutz.sqltpl.annotation;
 
-import com.github.threefish.nutz.sqltpl.service.ISqlTemplteEngine;
+import com.github.threefish.nutz.sqltpl.templte.ISqlTemplteEngine;
 import com.github.threefish.nutz.sqltpl.templte.beetl.BeetlSqlTemplteEngineImpl;
 
 import java.lang.annotation.*;

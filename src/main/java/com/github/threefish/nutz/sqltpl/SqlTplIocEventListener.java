@@ -4,7 +4,7 @@ import com.github.threefish.nutz.sqltpl.annotation.SqlsXml;
 import com.github.threefish.nutz.sqltpl.exception.NutzSqlTemplateXmlNotFoundError;
 import com.github.threefish.nutz.sqltpl.resource.FileResource;
 import com.github.threefish.nutz.sqltpl.resource.JarResource;
-import com.github.threefish.nutz.sqltpl.service.ISqlTemplteEngine;
+import com.github.threefish.nutz.sqltpl.templte.ISqlTemplteEngine;
 import com.github.threefish.nutz.sqltpl.service.ISqlTpl;
 import org.nutz.ioc.Ioc;
 import org.nutz.ioc.IocEventListener;
@@ -57,6 +57,11 @@ public class SqlTplIocEventListener implements IocEventListener {
         return 0;
     }
 
+    /**
+     * 取得xml文件名
+     * @param klass
+     * @return
+     */
     private String getXmlName(Class klass) {
         SqlsXml sqls = (SqlsXml) klass.getAnnotation(SqlsXml.class);
         return "".equals(sqls.value()) ? klass.getSimpleName().concat(XML) : sqls.value();

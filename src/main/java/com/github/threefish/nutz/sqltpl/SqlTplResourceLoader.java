@@ -1,7 +1,7 @@
 package com.github.threefish.nutz.sqltpl;
 
 import com.github.threefish.nutz.sqltpl.resource.Resource;
-import com.github.threefish.nutz.sqltpl.service.ISqlTemplteEngine;
+import com.github.threefish.nutz.sqltpl.templte.ISqlTemplteEngine;
 import com.github.threefish.nutz.utils.XmlUtils;
 import org.nutz.log.Log;
 import org.nutz.log.Logs;
