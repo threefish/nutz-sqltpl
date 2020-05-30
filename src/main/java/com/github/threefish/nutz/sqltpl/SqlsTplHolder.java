@@ -12,6 +12,10 @@ public class SqlsTplHolder {
      */
     SqlTplResourceLoader sqlTplResourceLoader;
 
+    /**
+     *
+     * @param sqlTplResourceLoader SQL资源加载器
+     */
     public SqlsTplHolder(SqlTplResourceLoader sqlTplResourceLoader) {
         this.sqlTplResourceLoader = sqlTplResourceLoader;
     }

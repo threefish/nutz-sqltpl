@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**
  * @author 黄川 huchuc@vip.qq.com
- * @date: 2020/5/25
+ * date: 2020/5/25
  */
 public class SqlTplResourceLoader {
 
