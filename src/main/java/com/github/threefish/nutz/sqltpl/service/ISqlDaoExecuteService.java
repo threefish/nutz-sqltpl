@@ -219,9 +219,10 @@ public interface ISqlDaoExecuteService<T> {
      */
     default PageDataDTO queryMapBySql(String id, NutMap param, Cnd cnd, Pager pager) {
         Sql sql = getSql(id, param, cnd, Sqls.callback.maps());
+        long count = Daos.queryCount(getDao(), sql);
         sql.setPager(pager);
         getDao().execute(sql);
-        return new PageDataDTO(Daos.queryCount(getDao(), sql), sql.getList(NutMap.class));
+        return new PageDataDTO(count, sql.getList(NutMap.class));
     }
 
     /**
@@ -249,10 +250,11 @@ public interface ISqlDaoExecuteService<T> {
      */
     default PageDataDTO queryEntityBySql(String id, NutMap param, Cnd cnd, Pager pager, Class entityClass) {
         Sql sql = getSql(id, param, cnd, Sqls.callback.entities());
+        long count = Daos.queryCount(getDao(), sql);
         sql.setEntity(getDao().getEntity(entityClass));
         sql.setPager(pager);
         getDao().execute(sql);
-        return new PageDataDTO(Daos.queryCount(getDao(), sql), sql.getList(entityClass));
+        return new PageDataDTO(count, sql.getList(getEntityClass()));
     }
 
     /**

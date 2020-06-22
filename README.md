@@ -2,12 +2,16 @@ nutz-sqltpl SQL模板实现
 ==================================
 ### 配合[NutzCodeInsight](https://plugins.jetbrains.com/plugin/10311-nutzcodeinsight)插件使用更香
 [源码](https://github.com/threefish/nutz-sqltpl)
+
 ### 支持多种模板引擎
 
 默认采用beetl引擎（注意,这不是与BeetlSql的集成），其他模版引擎可以自己扩展，详情看源码
 
-###用法
-然后在pom.xml中
+
+### [spring 版本请看这里](https://gitee.com/threefish/spring-boot-sqltpl)
+
+### 用法
+- 然后在pom.xml中
 ```xml
 <dependency>
   <groupId>com.github.threefish</groupId>
