@@ -24,7 +24,7 @@ var ioc = {
            args: [{refer: '$ioc'}]
        },
        beetlSqlTemplteEngineImpl: {
-           type: "com.github.threefish.nutz.sqltpl.BeetlSqlTemplteEngineImpl",
+           type: "com.github.threefish.nutz.sqltpl.templte.beetl.BeetlSqlTemplteEngineImpl",
            events: {
                create: "init"
            },
@@ -43,12 +43,33 @@ var ioc = {
 SqlsTplHolder.DEVELOPER_MODE = true;
 ```
 
-然后,你需要一个Service文件 实现 ISqlDaoExecuteService 接口
+#### 简单用法
+
+```java
+@SqlsXml("Bean1.xml")
+public class Bean1 implements ISqlTpl {
+
+    private SqlsTplHolder sqlsTplHolder;
+
+    @Override
+    public SqlsTplHolder getSqlTplHolder() {
+        return this.sqlsTplHolder;
+    }
+
+    @Override
+    public void setSqlTpl(SqlsTplHolder sqlsTplHolder) {
+        this.sqlsTplHolder = sqlsTplHolder;
+    }
+}
+```
+
+
+#### 复杂用法,你需要一个Service文件 实现 ISqlDaoExecuteService 接口
 
 ```java
 @IocBean(args = {"refer:dao"}, name = "companyService")
 @SqlsXml("CompanyService.xml")
-public class CompanyServiceImpl extends BaseServiceImpl<Company> implements CompanyService, ISqlDaoExecuteService {
+public class CompanyServiceImpl extends BaseServiceImpl<Company> implements ISqlTpl, CompanyService, ISqlDaoExecuteService {
     /**
     * 1、我是必须要有的
     * 2、可以不实现 ISqlDaoExecuteService 接口，用 SqlsTplHolder 直接渲染sql自己再进行操作
@@ -63,6 +84,18 @@ public class CompanyServiceImpl extends BaseServiceImpl<Company> implements Comp
     public SqlsTplHolder getSqlsTplHolder() {
         return this.sqlsTplHolder;
     }
+
+
+    @Override
+    public SqlsTplHolder getSqlTplHolder() {
+        return this.sqlsTplHolder;
+    }
+
+    @Override
+    public void setSqlTpl(SqlsTplHolder sqlsTplHolder) {
+        this.sqlsTplHolder = sqlsTplHolder;
+    }
+
 
     @Override
     public Dao getDao() {
