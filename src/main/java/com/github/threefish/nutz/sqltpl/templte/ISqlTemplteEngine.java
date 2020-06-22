@@ -1,4 +1,4 @@
-package com.github.threefish.nutz.sqltpl;
+package com.github.threefish.nutz.sqltpl.templte;
 
 import java.util.Map;
 

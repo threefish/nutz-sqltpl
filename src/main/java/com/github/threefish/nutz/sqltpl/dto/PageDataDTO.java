@@ -1,4 +1,4 @@
-package com.github.threefish.nutz.dto;
+package com.github.threefish.nutz.sqltpl.dto;
 
 import java.util.List;
 
@@ -11,11 +11,11 @@ public class PageDataDTO<T> {
     /**
      * 返回数据总数
      */
-    private Long count;
+    private final Long count;
     /**
      * 返回数据
      */
-    private List<T> data;
+    private final List<T> data;
 
     public PageDataDTO(Long count, List<T> data) {
         this.count = count;
