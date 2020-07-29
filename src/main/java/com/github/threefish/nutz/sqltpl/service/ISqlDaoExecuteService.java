@@ -59,6 +59,7 @@ public interface ISqlDaoExecuteService<T> {
      */
     default Sql getSql(String id, NutMap param, Cnd cnd, SqlCallback callback) {
         Sql sql = Sqls.create(getSqlsTplHolder().getSql(id, param));
+        param.forEach((k, v) -> sql.setParam(k, v));
         sql.setCallback(callback);
         if (cnd != null) {
             sql.setCondition(cnd);
